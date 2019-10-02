@@ -1,5 +1,7 @@
 {
   "name": "backtrack",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
