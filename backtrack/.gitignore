@@ -28,22 +28,4 @@ npm-debug.log*
 /node_modules
 /platforms
 /plugins
-/resources/android
-/resources/ios
-/resources/windows
-
-node_modules
-www
-.idea
-.temp
-.sass-cache
-<%= appPath %>/bower_components
-coverage
-platforms
-plugins
-*.swp
-*.swo
-*.log
-*.DS_Store
-
-app/scripts/configuration.js
+/www
