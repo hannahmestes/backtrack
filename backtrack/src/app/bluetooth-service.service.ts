@@ -36,7 +36,7 @@ export class BluetoothService {
       if(typeof scanStatus.advertisement !== 'string'){ // TODO: need to fix for android encoded advertisement
         if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){
           if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
-            this.addToTrackers(new Tracker(scanStatus.name, scanStatus.name, -40, scanStatus.address));
+            this.addToTrackers(new Tracker(scanStatus.name, scanStatus.name, -40, scanStatus.address)); // find a better default value
           }
         }
       }
