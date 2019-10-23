@@ -13,11 +13,11 @@ import { map, tap } from 'rxjs/operators';
 })
 export class BluetoothService {
 
-  mockTrackers = [];
   trackerUUIDs = ['FEED', 'FEEC', 'FE33', 'FE65'];
   mockDistance: Observable<number> = of(10);
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
-
+  distance: BehaviorSubject<number> = new BehaviorSubject(0);
+  whitelist: string[] = [];
 
   // initializes bluetooth function
   constructor(private bluetoothle: BluetoothLE, public plt: Platform) { 
@@ -28,27 +28,57 @@ export class BluetoothService {
       });
     });
 
-    this.trackers.subscribe(res => console.log('Trackers: ', JSON.stringify(res)));
   }
 
-
+  // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{
     this.bluetoothle.startScan({ services: [] }).subscribe(scanStatus => {      
-      if(typeof scanStatus.advertisement !== 'string'){ // TODO: need to fix for android
+      if(typeof scanStatus.advertisement !== 'string'){ // TODO: need to fix for android encoded advertisement
         if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){
-          if(this.isInTrackerList(scanStatus.advertisement.serviceUuids)){
-            this.addToTrackers(new Tracker(scanStatus.name, scanStatus.name, 1, scanStatus.address));
+          if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
+            this.addToTrackers(new Tracker(scanStatus.name, scanStatus.name, -40, scanStatus.address));
           }
         }
       }
     });
   }
 
+  // stops scan and resets tracker list
+  public stopScanning(): void{
+    this.trackers.next([]);
+    this.bluetoothle.stopScan();
+  }
+
+  public getTrackers(): Observable<Tracker[]>{
+    return this.trackers;
+  }
+
+  public addToWhitelist(address: string): void{
+    this.whitelist.push(address);
+  }
+
+  public removeFromWhitelist(address: string): void{
+    this.whitelist = this.whitelist.filter(listAddress => listAddress != address );
+  }
+
+  public isScanning(): Promise<{isScanning: boolean}>{
+    return this.bluetoothle.isScanning();
+  }
+
+  public getDistance(tracker: Tracker): Observable<number>{
+    this.bluetoothle.connect({address: tracker.address}).subscribe(connected => {
+      this.bluetoothle.rssi({address: tracker.address}).then(rssi => {
+        this.distance.next(this.calculateDistance(rssi.rssi, tracker.txPower));
+        }).catch(err => console.log('rssi error'));
+    });
+    return this.distance.asObservable();
+  }
+
   private calculateDistance(rssi: number, txPowerLevel: number){
     return 10 ** ((rssi - txPowerLevel)/-20);
   }
 
-  addToTrackers(tracker: Tracker){
+  private addToTrackers(tracker: Tracker){
     let trackerList = this.trackers.value;
       if(!trackerList.some(listTracker => listTracker.address == tracker.address)){
         trackerList.push(tracker);
@@ -66,24 +96,7 @@ export class BluetoothService {
     return found;
   }
 
-  public stopScanning(): void{
-    this.trackers = null;
-    this.bluetoothle.stopScan();
+  private isInWhiteList(address: string){
+    return this.whitelist.includes(address);
   }
-
-  public getTrackers(): Observable<Tracker[]>{
-    return this.trackers;
-  }
-
-  public isScanning(): any{
-    return this.bluetoothle.isScanning()
-  }
-
-  public showDistance(tracker: Tracker): Observable<number>{
-    this.bluetoothle.rssi({address: tracker.address}).then(rssi => console.log(rssi));
-    // TODO: impl
-    return this.mockDistance;
-
-  }
-
 }
