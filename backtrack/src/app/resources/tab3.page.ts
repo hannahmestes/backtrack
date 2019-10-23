@@ -15,10 +15,15 @@ export class Tab3Page {
   async Terms(){
 
     const modal = await this.modalController.create({
+<<<<<<< terms-conditions-styling
       component: TermsandconditonsPage,
       backdropDismiss: false
+=======
+      component: TermsandconditonsPage
+>>>>>>> master
     });
     return await modal.present();
   }
 
 }
+
