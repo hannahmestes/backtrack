@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-termsandconditons',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsandconditonsPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  closeModal(){
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
 
 }
