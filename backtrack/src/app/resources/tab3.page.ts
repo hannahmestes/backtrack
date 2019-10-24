@@ -13,14 +13,9 @@ export class Tab3Page {
   constructor(public modalController: ModalController) {}
 
   async Terms(){
-
     const modal = await this.modalController.create({
-<<<<<<< terms-conditions-styling
       component: TermsandconditonsPage,
       backdropDismiss: false
-=======
-      component: TermsandconditonsPage
->>>>>>> master
     });
     return await modal.present();
   }
