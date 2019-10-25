@@ -14,7 +14,17 @@ export class TabsPage {
   panic(){
     // do the panic thing
     this.runPanic=true;
-    console.log("Hi");
+    let video = document.createElement("VIDEO");
+
+    video.setAttribute("controls", "controls");
+    video.setAttribute("preload", "metadata");
+    video.setAttribute("autoplay", "autoplay"); 
+    let source = document.createElement("SOURCE");
+    source.setAttribute("src", "assets/Cat_Video.mp4");    
+    source.setAttribute("type", "video/mp4"); 
+    video.appendChild(source);
+
+    document.body.appendChild(video);
   }
 
 }
