@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'find-page',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../find-page/find-page.module').then(m => m.FindPagePageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
