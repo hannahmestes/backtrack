@@ -7,6 +7,14 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
+  btnClicked(){
+    window.open("https://www.domesticshelters.org/help#?page=1", "_system", "location=yes");
+  }
+
+  redirect(){
+    window.open("https://www.safehorizon.org/get-help/stalking/#overview/", "_system", "location=yes");
+  }
+
   constructor() {}
 
 }
