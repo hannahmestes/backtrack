@@ -10,33 +10,38 @@ export class FindPagePage implements OnInit {
   id: string;
   distance: number;
   name: string;
-  color: number;
+  colorRed: boolean;
+  colorYellow: boolean;
+  colorGreen: boolean;
 
   constructor() {
     this.name = 'Tile';
-    this.distance = 10;
+    this.distance = 7;
+    this.colorCircle(this.distance);
    }
 
   ngOnInit() {
     }
 
+  colorCircle(distance) {
+    if (distance >= 10) {
+      this.colorRed = true;
+      this.colorYellow = false;
+      this.colorGreen = false;
+    } else if (distance < 10 && distance > 2) {
+      this.colorRed = false;
+      this.colorYellow = true;
+      this.colorGreen = false;
+    } else if (distance <= 2) {
+      this.colorRed = false;
+      this.colorYellow = false;
+      this.colorGreen = true;
+    }
+    // else{
+      // return console.error();
+    // }
+  }
 
 }
 
-function colorCircle(distance){
-  if (distance > 10){
-    console.log('0');
-    return 0;//red
-  }
-  else if (distance <= 10 && distance > 2){
-    console.log('1');
-    return 1;//yellow
-  }
-  else if (distance <= 2){
-    console.log('2');
-    return 2;//green
-  }
-  //else{
-    //return console.error();
-  //}
-}
+
