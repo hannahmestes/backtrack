@@ -28,7 +28,7 @@
     "cordova-ios": "^5.0.1",
     "cordova-plugin-bluetoothle": "^4.5.5",
     "core-js": "^2.5.4",
-    "rxjs": "~6.5.1",
+    "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
