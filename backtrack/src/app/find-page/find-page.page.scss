@@ -1,4 +1,11 @@
+h1{
+  text-align: center;
+}
+
 img {
     width: 70%;
     height: auto;
+    position: relative;
+    left: calc(14% - 20px);
+    margin: 20px;
   }

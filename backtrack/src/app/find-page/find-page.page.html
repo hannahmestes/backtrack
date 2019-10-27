@@ -1,32 +1,32 @@
 <ion-header>
   <ion-toolbar>
       <ion-title>
-            Tile
+            Finding Device
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!--  
-  <p *ngIf="device.color = 2">
-    <img src="https://i.imgur.com/1Gjbpgd.png"/>
-  </p>
-  <p *ngIf="device.color = 1">
-    <img src="https://i.imgur.com/1Gjbpgd.png"/>
-  </p>
-  <p *ngIf="device.color = 0">
-    <img src="https://i.imgur.com/1Gjbpgd.png"/>
-  </p>
-  -->   
+<ion-content class="ion-padding">
 
-    <img src="https://i.imgur.com/1Gjbpgd.png"/>
-<!-- Display distance (currently testing) -->
-     <ion-text class="ion-text-center"> 10 m away </ion-text> 
-
-     <div><ion-button shape="round" color="primary">Found</ion-button></div>
-     <div><ion-button shape="round" color="primary">Whitelist this device</ion-button></div>
-     <ion-button shape="round" color="medium">Need Help?</ion-button>
-
-     <script>
-     </script>
+    <ion-grid>
+        <ion-row>
+          <ion-col size-md="6" offset-md="3">
+            <h1>{{ name }}</h1>
+            <ion-item>
+              <img src="https://i.imgur.com/1Gjbpgd.png"/>
+              <!-- Display distance (currently testing) -->
+            </ion-item>
+            <ion-item>
+            <div>
+              <ion-text> {{ distance }} m away </ion-text>
+            </div>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-center">
+              <div><ion-button color="primary">Found</ion-button></div>
+              <div><ion-button color="primary">Whitelist this device</ion-button></div>
+              <ion-button shape="round" color="medium">Need Help?</ion-button>  
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
 </ion-content>
