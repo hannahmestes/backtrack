@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ɵTestingCompiler } from '@angular/core/testing';
+import { BluetoothService } from '../bluetooth-service.service';
+import { Tracker } from '../Tracker';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-find-page',
@@ -7,21 +10,40 @@ import { ɵTestingCompiler } from '@angular/core/testing';
   styleUrls: ['./find-page.page.scss'],
 })
 export class FindPagePage implements OnInit {
-  id: string;
   distance: number;
   name: string;
   colorRed: boolean;
   colorYellow: boolean;
   colorGreen: boolean;
+  address: string;
 
-  constructor() {
-    this.name = 'Tile';
-    this.distance = 7;
-    this.colorCircle(this.distance);
+  constructor(private bluetoothService: BluetoothService, private actRoute: ActivatedRoute, private ngZone: NgZone) {
+
    }
 
   ngOnInit() {
-    }
+    this.address = this.actRoute.snapshot.params['address'];
+    console.log(this.address);
+    this.getDistance();
+  }
+
+  ngOnDestroy(){
+    this.bluetoothService.stopFinding();
+  }
+
+  getDistance(){
+    this.bluetoothService.getDistance(this.address).subscribe(res => {
+      console.log(res);
+      this.ngZone.run( () => {
+        this.distance = res;
+        this.colorCircle(this.distance);
+      });
+    });
+  }
+
+  addToWhitelist(){
+    this.bluetoothService.addToWhitelist(this.address);
+  }
 
   colorCircle(distance) {
     if (distance >= 10) {
