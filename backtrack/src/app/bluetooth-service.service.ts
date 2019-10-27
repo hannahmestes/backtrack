@@ -14,7 +14,6 @@ import { map, tap } from 'rxjs/operators';
 export class BluetoothService {
 
   trackerUUIDs = ['FEED', 'FEEC', 'FE33', 'FE65'];
-  mockDistance: Observable<number> = of(10);
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
   distance: BehaviorSubject<number> = new BehaviorSubject(0);
   whitelist: string[] = [];
@@ -25,7 +24,7 @@ export class BluetoothService {
       console.log('Platform ready from', readySource);
       this.bluetoothle.initialize().subscribe(ble => {
         console.log('ble', ble.status) // logs 'enabled'
-      });
+      }, err => console.log(err));
     });
 
   }
@@ -40,7 +39,7 @@ export class BluetoothService {
           }
         }
       }
-    });
+    }, err => console.log(err));
   }
 
   // stops scan and resets tracker list

@@ -1,4 +1,30 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+.btn{
+  border: none;
+  background-color: dodgerblue;
+  padding: 60px 20px;
+  text-align: middle;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  border-radius: 50%;
+  position: relative;
+  left: calc(50% - 63px);
+}
+
+.head{
+  font-size: 30px;
+  position: relative;
+}
+
+.listin{
+  font-size:16px
+}
+
+.btn:hover{
+  background-color: red;
+}
+.text{
+  visibility: visible;
+  content: "";
+  color: grey;
 }

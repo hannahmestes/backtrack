@@ -1,13 +1,24 @@
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab One
+    <ion-title class="head">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="scan()">
-    Scan
-  </ion-button>
+    <button color="primary" class="btn toScan" (click)="scan()">Tap to Scan</button>
+    <ion-card class="tracker-list">
+      <ion-card-content>
+        <ng-container *ngIf="trackers$ | async as trackers">
+          <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
+          <div *ngFor="let tracker of trackers">
+          <ion-item >
+            {{tracker.name? tracker.name : 'null''}}
+          </ion-item>
+          </div>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+
 </ion-content>
