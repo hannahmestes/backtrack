@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Source } from 'webpack-sources';
+import { BluetoothService } from '../bluetooth-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,8 +9,15 @@ import { Source } from 'webpack-sources';
 export class Tab1Page {
 
   public loan: Array<{item: device}> = [];
+  constructor(private blueToothService: BluetoothService) {}
 
-  constructor() {
+  scan(){
+    this.blueToothService.isScanning().then(res=>{
+    if (res.isScanning)
+      this.blueToothService.stopScanning();
+    else
+      this.blueToothService.startScanning();
+    });
   }
   
   public name() {
