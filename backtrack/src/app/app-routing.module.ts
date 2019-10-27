@@ -6,7 +6,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  { path: 'find-tracker', loadChildren: './find-tracker/find-tracker.module#FindTrackerPageModule' }
+  { path: 'find-tracker', loadChildren: './find-tracker/find-tracker.module#FindTrackerPageModule' },  { path: 'termsandconditons', loadChildren: './termsandconditons/termsandconditons.module#TermsandconditonsPageModule' }
+
 ];
 @NgModule({
   imports: [

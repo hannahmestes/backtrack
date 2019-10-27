@@ -9,9 +9,11 @@ import { Tab1Page } from './tab1.page';
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule,
+    FormsModule,  
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
   declarations: [Tab1Page]
 })
 export class Tab1PageModule {}
+
+
