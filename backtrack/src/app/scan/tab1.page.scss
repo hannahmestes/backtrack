@@ -6,30 +6,22 @@
   font-size: 16px;
   cursor: pointer;
   display: flex;
-  margin: 20px;
   border-radius: 50%;
   position: relative;
-  left: calc(50% - 60px);
+  left: calc(50% - 63px);
 }
+
 .head{
   font-size: 30px;
   position: relative;
 }
+
 .listin{
   font-size:16px
 }
-.butt{
-  border: solid;
-  color: rgb(223, 69, 69);
-  padding: 5px ;
-  font-size: 16px;
-  text-align: left;
-  border-radius: 5px;
-  visibility: hidden;
-}
+
 .btn:hover{
   background-color: red;
-
 }
 .text{
   visibility: visible;

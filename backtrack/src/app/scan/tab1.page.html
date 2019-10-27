@@ -7,19 +7,18 @@
 </ion-header>
 
 <ion-content>
-    <button class="btn toScan" (click)="background-color = red" (click)="changeColor()">Tap to Scan</button>
+    <button color="primary" class="btn toScan" (click)="scan()">Tap to Scan</button>
     <ion-card class="tracker-list">
       <ion-card-content>
-        <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
+        <ng-container *ngIf="trackers$ | async as trackers">
+          <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
+          <div *ngFor="let tracker of trackers">
+          <ion-item >
+            {{tracker.name? tracker.name : 'null''}}
+          </ion-item>
+          </div>
+        </ng-container>
       </ion-card-content>
-      <ion-list lines='none'>
-        <ion-item *ngFor="let loan of loans">
-          {{item.name}}
-        </ion-item>
-      </ion-list>
     </ion-card>
 
-  <ion-button (click)="scan()">
-    Scan
-  </ion-button>
 </ion-content>
