@@ -1,1 +1,28 @@
 
+.butt {
+	text-decoration: none;
+	color: initial;
+	border: none;
+	width: 100px;
+	height: 60px;
+	cursor: pointer;
+	border-radius: 12px;
+	display: inline-block;
+	
+    box-shadow:
+        inset 5px 8px 14px 0px rgba(255,255,255,.5),
+        inset 8px 5px 14px 0px rgba(255,255,255,.2),
+        inset -5px -8px 14px 0px rgba(80,80,80,.5),
+		inset -8px -5px 14px 0px rgba(80,80,80,.2),
+        0px 0px 0px 0 rgba(0,0,0,.3);
+}
+
+.cob{
+	background-color: black;}
+.cob:hover {
+	background-color: gray;}
+.cor{
+	background-color: red;}
+.cor:hover {
+	background-color: darkred;}
+	
