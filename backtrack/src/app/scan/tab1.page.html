@@ -2,19 +2,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="head">
-      BackTrack
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <button class="btn toScan" (click)="background-color = red" (click)="appendList() ">Tap to Scan</button>
+    <button class="btn toScan" (click)="background-color = red" (click)="changeColor()">Tap to Scan</button>
     <ion-card class="tracker-list">
       <ion-card-content>
         <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
       </ion-card-content>
       <ion-list lines='none'>
-        
+        <ion-item *ngFor="let loan of loans">
+          {{item.name}}
+        </ion-item>
       </ion-list>
     </ion-card>
 

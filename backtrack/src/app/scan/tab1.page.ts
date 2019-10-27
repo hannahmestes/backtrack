@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Source } from 'webpack-sources';
 
 @Component({
   selector: 'app-tab1',
@@ -7,9 +8,24 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  public loan: Array<{item: device}> = [];
 
-}
+  constructor() {
+  }
+  
+  public name() {
+  } 
+
+  public appendList() {
+    let item = new device("5550123");
+    let test = document.createElement(item.name);
+
+  }
+
+  public changeColor() {
+
+  }
+} 
 
 export class device {
   name: string;
@@ -21,15 +37,4 @@ export class device {
     this.name = "Tile";
   }
 }
-
-function appendList() {
-  this.newItem = "<ion-item class= 'listin'>";
-  this.newItem = "<button (click)='find()' class= 'butt'>";
-  this.newItem = "<ion-icon slot= 'start' color= 'medium' name= 'analytics'></ion-icon>";
-  this.newItem = "number";
-  this.newItem = "</button>";
-  this.newItem = "</ion-item>";
-} 
-
-let test = new device("5550123");
 
