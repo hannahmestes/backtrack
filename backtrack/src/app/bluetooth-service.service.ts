@@ -72,7 +72,6 @@ export class BluetoothService {
         this.bluetoothle.rssi({address: address}).then(rssi => {
           this.distance.next(this.calculateDistance(rssi.rssi, -40));
           }).catch(err => {
-            bluetoothSubsc.unsubscribe();
             console.log('rssi error');
           });
         await this.delay(500);
