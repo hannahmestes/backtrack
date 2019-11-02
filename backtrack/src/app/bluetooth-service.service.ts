@@ -17,6 +17,7 @@ export class BluetoothService {
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
   distance: BehaviorSubject<number> = new BehaviorSubject(0);
   whitelist: string[] = [];
+  isFinding= false;
 
   // initializes bluetooth function
   constructor(private bluetoothle: BluetoothLE, public plt: Platform) { 
@@ -64,13 +65,24 @@ export class BluetoothService {
     return this.bluetoothle.isScanning();
   }
 
-  public getDistance(tracker: Tracker): Observable<number>{
-    this.bluetoothle.connect({address: tracker.address}).subscribe(connected => {
-      this.bluetoothle.rssi({address: tracker.address}).then(rssi => {
-        this.distance.next(this.calculateDistance(rssi.rssi, tracker.txPower));
-        }).catch(err => console.log('rssi error'));
+  public getDistance(address: string): Observable<number>{
+    this.isFinding = true;
+    let bluetoothSubsc = this.bluetoothle.connect({address: address}).subscribe(async connected => {
+      while(this.isFinding){
+        this.bluetoothle.rssi({address: address}).then(rssi => {
+          this.distance.next(this.calculateDistance(rssi.rssi, -40));
+          }).catch(err => {
+            console.log('rssi error');
+          });
+        await this.delay(500);
+      }
     });
     return this.distance.asObservable();
+  }
+
+  public stopFinding(){
+    console.log("STOP");
+    this.isFinding=false;
   }
 
   private calculateDistance(rssi: number, txPowerLevel: number){
@@ -97,5 +109,9 @@ export class BluetoothService {
 
   private isInWhiteList(address: string){
     return this.whitelist.includes(address);
+  }
+
+  private delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

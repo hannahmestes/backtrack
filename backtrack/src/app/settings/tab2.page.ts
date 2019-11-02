@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FindPagePage } from '../find-page/find-page.page';
+import { NavController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -8,5 +10,7 @@ import { Component } from '@angular/core';
 export class Tab2Page {
 
   constructor() {}
+
+
 
 }

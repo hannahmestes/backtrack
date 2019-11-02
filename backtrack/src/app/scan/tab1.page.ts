@@ -3,6 +3,8 @@ import { Source } from 'webpack-sources';
 import { Tracker } from '../Tracker';
 import { BluetoothService } from '../bluetooth-service.service';
 import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +19,7 @@ export class Tab1Page {
   trackers: any
 
 
-  constructor(private btService: BluetoothService, private zone:NgZone) {
+  constructor(private btService: BluetoothService, private zone:NgZone, public router: Router) {
     this.trackers$ = btService.getTrackers();
     this.trackers$.subscribe(res => {
       this.zone.run(() => this.trackers = res)
@@ -30,7 +32,6 @@ export class Tab1Page {
     this.btService.isScanning().then(res=>{
       console.log(res);
     if (res.isScanning){
-      this.btService.stopScanning();
       this.buttonColor='primary';
     }
     else {    
@@ -38,6 +39,11 @@ export class Tab1Page {
       this.buttonColor = 'danger';
     }
     });
+  }
+
+  trackerSelect(address: string){
+    this.btService.stopScanning();
+    this.router.navigate(['find-page/' + address]).then(res=> console.log(res));
   }
 
 } 

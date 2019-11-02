@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>
+            Finding Device
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-grid>
+        <ion-row>
+          <ion-col size-md="6" offset-md="3">
+            <h1>{{ name }}</h1>
+            <script>colorCircle()</script>
+            <ion-item>
+              <p *ngIf="colorGreen"><img src="https://i.imgur.com/1Gjbpgd.png"/></p>
+              <p *ngIf="colorYellow"><img src="https://i.imgur.com/qPvFj73.png"/></p>
+              <p *ngIf="colorRed"><img src="https://i.imgur.com/Z2TVn8J.png"/></p>
+            </ion-item>
+            <ion-item>
+            <div text-center>
+              <ion-text> {{ distance | number:'1.1-5' }} m away </ion-text>
+            </div>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-center">
+              <div><ion-button color="primary">Found</ion-button></div>
+              <div><ion-button color="primary" (click)="addToWhitelist()">Whitelist this device</ion-button></div>
+              <ion-button shape="round" color="medium">Need Help?</ion-button>  
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+</ion-content>
+
+
+<!-- 
+  https://i.imgur.com/1Gjbpgd.png is for the green circle
+  https://i.imgur.com/qPvFj73.png is for the yellow circle
+  https://i.imgur.com/Z2TVn8J.png is for the red circle
+ -->

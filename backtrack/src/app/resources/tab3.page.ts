@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TermsandconditonsPage } from '../termsandconditons/termsandconditons.page';
 import { ModalController } from '@ionic/angular'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'app-tab3',
@@ -21,11 +22,13 @@ export class Tab3Page {
   }
   
   btnClicked(){
-    window.open("https://www.domesticshelters.org/help#?page=1", "_system", "location=yes");
+    let browser = InAppBrowser.create("https://www.domesticshelters.org/help#?page=1", "_system");
+
   }
 
   redirect(){
-    window.open("https://www.safehorizon.org/get-help/stalking/#overview/", "_system", "location=yes");
+    let browser = InAppBrowser.create("https://www.safehorizon.org/get-help/stalking/#overview/", "_system");
+
   }
 
 

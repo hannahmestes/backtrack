@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FindTrackerPage } from './find-tracker.page';
+import { FindPagePage } from './find-page.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FindTrackerPage
+    component: FindPagePage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FindTrackerPage]
+  declarations: [FindPagePage]
 })
-export class FindTrackerPageModule {}
+export class FindPagePageModule {}
