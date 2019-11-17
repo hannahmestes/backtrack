@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TabsPage } from '../tabs/tabs.page';
 import { Storage } from '@ionic/storage';
 import { SettingsService } from '../settings.service';
 
