@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { TermsandconditonsPage } from '../termsandconditons/termsandconditons.page';
-import { ModalController } from '@ionic/angular'
+import { ModalController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -11,16 +13,21 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 })
 export class Tab3Page {
 
-  constructor(public modalController: ModalController) {}
+  constructor(public modalController: ModalController, private router: Router) {}
 
-  async Terms(){
+  async Terms() {
     const modal = await this.modalController.create({
       component: TermsandconditonsPage,
       backdropDismiss: false
     });
     return await modal.present();
+  }  
+
+
+  toTutorial() {
+    this.router.navigate(['/tutorial']);
   }
-  
+
   getHelp(){
     let browser = InAppBrowser.create("https://www.domesticshelters.org/help#?page=1", "_system");
   }

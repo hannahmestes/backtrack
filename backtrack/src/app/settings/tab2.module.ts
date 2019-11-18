@@ -5,13 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: Tab2Page
-  }
-];
-
 @NgModule({
   imports: [
     IonicModule,
