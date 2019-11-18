@@ -24,7 +24,16 @@
   background-color: red;
 }
 .text{
-  visibility: visible;
-  content: "";
   color: grey;
+}
+
+.address{
+  text-overflow: ellipsis;
+  color: grey;
+  font-size: 11px;
+  width: 200px;
+}
+
+.distance{
+  text-align: center;
 }

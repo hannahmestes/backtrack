@@ -15,9 +15,10 @@ export class BluetoothService {
 
   trackerUUIDs = ['FEED', 'FEEC', 'FE33', 'FE65'];
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
-  distance: BehaviorSubject<number> = new BehaviorSubject(0);
+  distance: BehaviorSubject<number> = new BehaviorSubject(-1);
   whitelist: string[] = [];
   isFinding= false;
+  tileTxPower = -50;
 
   // initializes bluetooth function
   constructor(private bluetoothle: BluetoothLE, public plt: Platform) { 
@@ -33,20 +34,28 @@ export class BluetoothService {
   // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{
     this.bluetoothle.startScan({ services: [] }).subscribe(scanStatus => {      
-      if(typeof scanStatus.advertisement !== 'string'){ // TODO: need to fix for android encoded advertisement
-        if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){
+      if(typeof scanStatus.advertisement !== 'string'){ // check that device is iOS
+        if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){ // check that device is broadcasting required information
           if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
-            this.addToTrackers(new Tracker(scanStatus.name, scanStatus.name, -40, scanStatus.address)); // find a better default value
+            let tracker = new Tracker(scanStatus.name, 
+                                      scanStatus.name, 
+                                      this.tileTxPower, 
+                                      scanStatus.address, 
+                                      this.calculateDistance(scanStatus.rssi, this.tileTxPower))
+            this.addToTrackers(tracker);
           }
         }
+      }
+      else{
+        console.log("Android not yet implemented");
       }
     }, err => console.log(err));
   }
 
   // stops scan and resets tracker list
   public stopScanning(): void{
-    this.trackers.next([]);
     this.bluetoothle.stopScan();
+    this.trackers.next([]);
   }
 
   public getTrackers(): Observable<Tracker[]>{
@@ -66,35 +75,40 @@ export class BluetoothService {
   }
 
   public getDistance(address: string): Observable<number>{
+    let distance = new BehaviorSubject(0);
     this.isFinding = true;
+    console.log("Connecting...");
     let bluetoothSubsc = this.bluetoothle.connect({address: address}).subscribe(async connected => {
       while(this.isFinding){
         this.bluetoothle.rssi({address: address}).then(rssi => {
-          this.distance.next(this.calculateDistance(rssi.rssi, -40));
-          }).catch(err => {
-            console.log('rssi error');
+          distance.next(this.calculateDistance(rssi.rssi, this.tileTxPower));
+          }).catch(err => { // connection to bluetooth device has been lost
+            this.isFinding = false;
+            distance.next(-1);
+            console.log('rssi error: ', JSON.stringify(err));
           });
         await this.delay(500);
       }
-    });
-    return this.distance.asObservable();
+    }, err => console.log('connectionError: ', JSON.stringify(err)));
+    return distance.asObservable();
   }
 
   public stopFinding(){
-    console.log("STOP");
     this.isFinding=false;
   }
 
   private calculateDistance(rssi: number, txPowerLevel: number){
-    return 10 ** ((rssi - txPowerLevel)/-20);
+    return 10 ** ((txPowerLevel - rssi)/30);
   }
 
   private addToTrackers(tracker: Tracker){
     let trackerList = this.trackers.value;
-      if(!trackerList.some(listTracker => listTracker.address == tracker.address)){
-        trackerList.push(tracker);
-        this.trackers.next(trackerList);
-      }
+    let index = trackerList.findIndex(listTracker => listTracker.address == tracker.address);
+    if(index >=0)
+      trackerList[index] = tracker;
+    else
+      trackerList.push(tracker);
+    this.trackers.next(trackerList);
   }
 
   private isInTrackerList(uuids: string[]){

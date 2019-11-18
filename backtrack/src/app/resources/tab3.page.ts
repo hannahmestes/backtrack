@@ -21,15 +21,12 @@ export class Tab3Page {
     return await modal.present();
   }
   
-  btnClicked(){
+  getHelp(){
     let browser = InAppBrowser.create("https://www.domesticshelters.org/help#?page=1", "_system");
-
   }
 
-  redirect(){
+  getFacts(){
     let browser = InAppBrowser.create("https://www.safehorizon.org/get-help/stalking/#overview/", "_system");
-
   }
-
 
 }
