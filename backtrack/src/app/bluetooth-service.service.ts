@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 import { Platform } from '@ionic/angular';
 import { map, tap } from 'rxjs/operators';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
@@ -16,12 +17,11 @@ export class BluetoothService {
   trackerUUIDs = ['FEED', 'FEEC', 'FE33', 'FE65'];
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
   distance: BehaviorSubject<number> = new BehaviorSubject(-1);
-  whitelist: string[] = [];
   isFinding= false;
   tileTxPower = -50;
 
   // initializes bluetooth function
-  constructor(private bluetoothle: BluetoothLE, public plt: Platform) { 
+  constructor(private bluetoothle: BluetoothLE, public plt: Platform, private settings: SettingsService) { 
     this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
       this.bluetoothle.initialize().subscribe(ble => {
@@ -63,11 +63,11 @@ export class BluetoothService {
   }
 
   public addToWhitelist(address: string): void{
-    this.whitelist.push(address);
+    this.settings.addToWhitelist(address);
   }
 
   public removeFromWhitelist(address: string): void{
-    this.whitelist = this.whitelist.filter(listAddress => listAddress != address );
+    // get this fixed in settings
   }
 
   public isScanning(): Promise<{isScanning: boolean}>{
@@ -122,7 +122,7 @@ export class BluetoothService {
   }
 
   private isInWhiteList(address: string){
-    return this.whitelist.includes(address);
+    return this.settings.whitelist.includes(address);
   }
 
   private delay(ms: number) {
