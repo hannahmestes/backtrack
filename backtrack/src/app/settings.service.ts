@@ -11,8 +11,8 @@ export class SettingsService {
     throw new Error("Method not implemented.");
   }
 
-  public whitelist: string[]; //addresses of trackers in whitelist
-  public blacklist: string[]; //addresses of trackers in blacklist
+  public whitelist: string[] = []; //addresses of trackers in whitelist
+  public blacklist: string[] = []; //addresses of trackers in blacklist
   public hasAcceptedTerms: boolean;
   public hasViewedTutorial: boolean;
   public backgroundScanningEnabled: boolean;

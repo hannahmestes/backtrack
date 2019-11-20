@@ -33,15 +33,11 @@ export class BluetoothService {
 
   // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{
-    this.bluetoothle.startScan({ services: [] }).subscribe(scanStatus => {      
+    this.bluetoothle.startScan({ services: [] }).subscribe(scanStatus => {   
       if(typeof scanStatus.advertisement !== 'string'){ // check that device is iOS
         if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){ // check that device is broadcasting required information
           if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
-            let tracker = new Tracker(scanStatus.name, 
-                                      scanStatus.name, 
-                                      this.tileTxPower, 
-                                      scanStatus.address, 
-                                      this.calculateDistance(scanStatus.rssi, this.tileTxPower))
+            let tracker = new Tracker(scanStatus.name, scanStatus.name, this.tileTxPower, scanStatus.address, this.calculateDistance(scanStatus.rssi, this.tileTxPower))
             this.addToTrackers(tracker);
           }
         }
@@ -49,7 +45,7 @@ export class BluetoothService {
       else{
         console.log("Android not yet implemented");
       }
-    }, err => console.log(err));
+    }, err => console.log("ERROR:", JSON.stringify(err)));
   }
 
   // stops scan and resets tracker list
@@ -64,10 +60,6 @@ export class BluetoothService {
 
   public addToWhitelist(address: string): void{
     this.settings.addToWhitelist(address);
-  }
-
-  public removeFromWhitelist(address: string): void{
-    // get this fixed in settings
   }
 
   public isScanning(): Promise<{isScanning: boolean}>{
@@ -98,17 +90,15 @@ export class BluetoothService {
   }
 
   private calculateDistance(rssi: number, txPowerLevel: number){
-    return 10 ** ((txPowerLevel - rssi)/30);
+    return 10 ** ((txPowerLevel - rssi)/40);
   }
 
   private addToTrackers(tracker: Tracker){
     let trackerList = this.trackers.value;
-    let index = trackerList.findIndex(listTracker => listTracker.address == tracker.address);
-    if(index >=0)
-      trackerList[index] = tracker;
-    else
-      trackerList.push(tracker);
-    this.trackers.next(trackerList);
+    if(!trackerList.some(listTracker => listTracker.address == tracker.address)){
+       trackerList.push(tracker);
+       this.trackers.next(trackerList);
+   }
   }
 
   private isInTrackerList(uuids: string[]){

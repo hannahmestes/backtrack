@@ -32,6 +32,7 @@ export class Tab1Page {
     this.btService.isScanning().then(res=>{
       console.log(res);
     if (res.isScanning){
+      this.btService.stopScanning();
       this.buttonColor='primary';
     }
     else {    
@@ -43,7 +44,8 @@ export class Tab1Page {
 
   trackerSelect(address: string){
     this.btService.stopScanning();
-    this.router.navigate(['find-page/' + address]).then(res=> console.log(res));
+    this.buttonColor='primary';
+    this.router.navigate(['find-page/' + address]).then(res=> console.log(JSON.stringify(res))).catch(err => console.log(JSON.stringify(err)));
   }
 
 } 

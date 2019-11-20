@@ -16,10 +16,9 @@ export class FindPagePage implements OnInit {
   colorYellow: boolean;
   colorGreen: boolean;
   address: string;
-  state: string;
 
   constructor(private bluetoothService: BluetoothService, private actRoute: ActivatedRoute, private ngZone: NgZone) {
-
+    this.distance = 0;
    }
 
   ngOnInit() {
@@ -32,13 +31,8 @@ export class FindPagePage implements OnInit {
   }
 
   getDistance(){
-    this.state = 'CONNECTING';
     this.bluetoothService.getDistance(this.address).subscribe(res => {
       this.ngZone.run( () => {
-        if(res < 0){
-          this.state = 'DISCONNECTED';
-        }
-        this.state = 'FINDING';
         this.distance = res;
         this.colorCircle(this.distance);
       });
