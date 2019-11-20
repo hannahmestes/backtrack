@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+              Blacklist
+      </ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card class="tracker-list">
+      <ion-card-content>
+        <ng-container *ngIf="trackers$ | async as trackers">
+          <div *ngFor="let tracker of trackers">
+          <ion-item detail>
+            {{tracker.name? tracker.name : null}}
+          </ion-item>
+          </div>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
