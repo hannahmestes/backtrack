@@ -17,8 +17,8 @@
  
  
  Required tools for this project are:
- ionic 
- cordova
- [This shows you how to download the required tools for this project] (https://ionicframework.com/getting-started)
+ 
+ Cordova
+ [Ionic] (https://ionicframework.com/getting-started)
  
  
