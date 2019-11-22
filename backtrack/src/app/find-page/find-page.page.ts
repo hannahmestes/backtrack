@@ -40,7 +40,7 @@ export class FindPagePage implements OnInit {
   }
 
   addToWhitelist(){
-    this.bluetoothService.addToWhitelist(this.address);
+    this.bluetoothService.addToWhitelist(this.address, this.name);
   }
 
   colorCircle(distance) {

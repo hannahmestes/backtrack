@@ -25,14 +25,16 @@ export class BluetoothService {
   constructor(private bluetoothle: BluetoothLE, public plt: Platform, private settings: SettingsService) { 
     this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
-      this.maxDistance = settings.maxDistance;
-      console.log(this.maxDistance);
       this.bluetoothle.initialize().subscribe(ble => {
         console.log('ble', ble.status) // logs 'enabled'
       }, err => console.log(err));
     });
-
   }
+
+  // ngOnInit(){
+  //   this.maxDistance = this.settings.maxDistance;
+  //   console.log("MAX DISTANCE", this.maxDistance)
+  // }
 
   // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{
@@ -41,7 +43,7 @@ export class BluetoothService {
         if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){ // check that device is broadcasting required information
           if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
             let distance = this.calculateDistance(scanStatus.rssi, this.tileTxPower);
-            if(distance < this.maxDistance){
+            if(distance < this.settings.maxDistance){
               let tracker = new Tracker(scanStatus.name, scanStatus.name, this.tileTxPower, scanStatus.address, distance);
               this.addToTrackers(tracker);
             }
@@ -64,8 +66,8 @@ export class BluetoothService {
     return this.trackers;
   }
 
-  public addToWhitelist(address: string): void{
-    this.settings.addToWhitelist(address);
+  public addToWhitelist(address: string, name: string): void{
+    this.settings.addToWhitelist(name, address);
   }
 
   public isScanning(): Promise<{isScanning: boolean}>{
@@ -118,7 +120,7 @@ export class BluetoothService {
   }
 
   private isInWhiteList(address: string){
-    return this.settings.whitelist.includes(address);
+    return this.settings.whitelist.some(device => device.address == address);
   }
 
   private delay(ms: number) {
