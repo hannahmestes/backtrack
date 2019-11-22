@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { TutorialPageModule } from './tutorial/tutorial.module';
 
 const routes: Routes = [
   {
@@ -8,7 +9,9 @@ const routes: Routes = [
   },
   { path: 'termsandconditons', loadChildren: './termsandconditons/termsandconditons.module#TermsandconditonsPageModule' },
   { path: 'find-page/:address', loadChildren: './find-page/find-page.module#FindPagePageModule' },
-  { path: 'blacklist', loadChildren: './blacklist/blacklist.module#blacklistPageModule'}
+  { path: 'blacklist', loadChildren: './blacklist/blacklist.module#blacklistPageModule'},
+  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule'}
+
 ];
 
 
