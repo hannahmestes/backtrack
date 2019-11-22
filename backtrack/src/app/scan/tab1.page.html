@@ -12,7 +12,7 @@
       <ion-card-content>
         <ng-container *ngIf="trackers$ | async as trackers">
           <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
-          <div *ngFor="let tracker of trackers">
+          <div *ngFor="let tracker of trackers | orderBy: tacker.distance">
           <ion-item (click)="trackerSelect(tracker.address)" detail>
             {{tracker.name? tracker.name : null}}
           </ion-item>
@@ -22,3 +22,5 @@
     </ion-card>
 
 </ion-content>
+
+
