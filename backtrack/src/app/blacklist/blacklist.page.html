@@ -8,15 +8,21 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
+ 
   <ion-content>
     <ion-card class="tracker-list">
       <ion-card-content>
-        <ng-container *ngIf="trackers$ | async as trackers">
+        <ng-container *ngIf="trackers">
           <div *ngFor="let tracker of trackers">
-          <ion-item detail>
-            {{tracker.name? tracker.name : null}}
-          </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>{{tracker.name? tracker.name : null}}</p>
+                <p class="address">{{tracker.address}}</p>
+              </ion-label>
+              <ion-button fill="clear" size="large" class="dlt" (click) = "confirmation(tracker)">
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            </ion-item>
           </div>
         </ng-container>
       </ion-card-content>

@@ -29,7 +29,7 @@ export class BluetoothService {
     });
 
   }
-
+ 
   // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{
     this.bluetoothle.startScan({ services: [] }).subscribe(scanStatus => {      

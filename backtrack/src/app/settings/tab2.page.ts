@@ -39,6 +39,6 @@ export class Tab2Page {
   }
 
   blacklist(){
-    this.router.navigate(['blacklist']);
+    this.router.navigate(['/blacklist']);
   }
 }
