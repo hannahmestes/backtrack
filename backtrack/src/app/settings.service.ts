@@ -7,19 +7,24 @@ import { Storage } from '@ionic/storage';
 })
 export class SettingsService {
 
-  public whitelist: string[]; //addresses of trackers in whitelist
-  public blacklist: string[]; //addresses of trackers in blacklist
+  public whitelist: {name:string,address:string}[]; //addresses of trackers in whitelist
+  public blacklist: {name:string, address:string}[]; //addresses of trackers in blacklist
   public hasAcceptedTerms: boolean;
   public hasViewedTutorial: boolean;
   public backgroundScanningEnabled: boolean;
+  
 
-
+  
+  
   constructor(private storage: Storage) {
     this.retrieveSettings();
    }
 
-  addToWhitelist(trackerAddress: string){
+  addToWhitelist(name:string,trackerAddress: string){
     // add to array and save to local storage
+    this.whitelist.push({name:name, address:trackerAddress})
+    
+    
     
     
     this.storage.set("whitelistvalue",JSON.stringify(this.whitelist));
@@ -28,6 +33,8 @@ export class SettingsService {
 
   addToBlacklist(trackerAddress: string){
     // add to blacklist and save to local storage
+    this.blacklist.push({name:name, address:trackerAddress})
+    
     this.storage.set("blacklistvalue",JSON.stringify(this.blacklist));
   }
 
@@ -48,11 +55,40 @@ export class SettingsService {
 
   retrieveSettings(){
     // get all of the settings from local storage and set them
-    this.storage.get("retrieveSettings","addToBlacklist");
-    this.storage.get("retrienveSettings","acceptTerms");
-    this.storage.get("retrieveSettings","addToWhiteList");
-    this.storage.get("retrieveSettings","tutorialViewed");
-    this.storage.get("retrieveSettings","setBackgroundScanning");
+    this.storage.get("blacklistvalue").then(val => {
+      if (val==null)
+        this.blacklist=[];
+      else
+        this.blacklist= JSON.parse(val);
+    });
+    this.storage.get("acceptTerms").then (val=> {
+      if (val==null)
+      this.hasAcceptedTerms=false;
+    else
+      
+      this.hasAcceptedTerms= JSON.parse(val);
+    });
+    this.storage.get("whitelistvalue").then (val=> {
+      if (val==null)
+      this.whitelist=[];
+    else
+      
+      this.whitelist= JSON.parse(val);
+    });
+    this.storage.get("tutorialViewed").then (val=> {
+      if (val==null)
+      this.hasViewedTutorial=false;
+    else
+      
+      this.hasViewedTutorial= JSON.parse(val);
+    });
+    this.storage.get("setBackgroundScanning").then (val=> {
+      if (val==null)
+      this.backgroundScanningEnabled=false;
+    else
+      
+      this.backgroundScanningEnabled= JSON.parse(val);
+    });
   }
 
 }
