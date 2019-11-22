@@ -14,11 +14,15 @@ import { AlertController } from '@ionic/angular'
 export class blacklistPage {
 
   brock: Tracker;
+  jerry: Tracker;
+  may: Tracker;
   trackers: any;
 
   constructor(public alertCont: AlertController) {
-    this.brock = new Tracker('name', 'address', 69, 'fourtwenty');
-    this.trackers = [this.brock];
+    this.brock = new Tracker('brock', 'address', 69, 'fourtwenty');
+    this.jerry = new Tracker('jerry', 'address', 69, 'fourtwenty');
+    this.may = new Tracker('may', 'address', 69, 'fourtwenty');
+    this.trackers = [this.brock,this.jerry,this.may];
   }
 
   removeTracker(tracker: Tracker) {
@@ -27,7 +31,7 @@ export class blacklistPage {
         this.trackers.splice(x,1);
       }
     }
-  } 
+  }  
 
   async confirmation(tracker: Tracker){
     const alert = await this.alertCont.create({
