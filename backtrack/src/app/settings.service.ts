@@ -6,6 +6,10 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class SettingsService {
+  static hasViewedTutorial: boolean;
+  static tutorialViewed() {
+    throw new Error("Method not implemented.");
+  }
 
   public whitelist: {name:string,address:string}[]; //addresses of trackers in whitelist
   public blacklist: {name:string, address:string}[]; //addresses of trackers in blacklist
@@ -43,9 +47,10 @@ export class SettingsService {
     this.storage.set("acceptTerms","true");
   }
 
-  tutorialViewed(){
+  tutorialViewed() {
     // set hasViewedTutorial to true and save to local storage
     this.storage.set("tutorialViewed","true");
+    this.hasViewedTutorial = true;
   }
 
   setBackgroundScanning(isEnabled: boolean){
