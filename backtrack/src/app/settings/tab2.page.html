@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Settings
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content></ion-content>
 
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>Settings</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content fullscreen>
+      <ion-list>
+        <ion-item>
+          <ion-label>Notifications</ion-label>
+          <ion-toggle slot="start" name="notifications" (click)="setNotifications()"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Background Running</ion-label>
+          <ion-toggle slot="start" name="backgroundRunning" (click)="setBackgroundTracking()"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-button class="Check Blk">Check Blacklist</ion-button>
+        </ion-item>
+
+        <ion-item>
+            <ion-button class="Check Wht">Check Whitelist</ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Range</ion-label>
+          <ion-range dual-knobs="true" min="0" max="3" step="1" snaps="true"></ion-range>
+        </ion-item>
+      </ion-list>
+    </ion-content>
