@@ -16,6 +16,7 @@ export class SettingsService {
   public hasAcceptedTerms: boolean;
   public hasViewedTutorial: boolean;
   public backgroundScanningEnabled: boolean;
+  public maxDistance: number = 10; // mocked for now, will need to be integrated with other stuffs
 
 
   constructor(private storage: Storage) {

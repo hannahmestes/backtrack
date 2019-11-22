@@ -19,11 +19,14 @@ export class BluetoothService {
   distance: BehaviorSubject<number> = new BehaviorSubject(-1);
   isFinding= false;
   tileTxPower = -50;
+  maxDistance: number;
 
   // initializes bluetooth function
   constructor(private bluetoothle: BluetoothLE, public plt: Platform, private settings: SettingsService) { 
     this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
+      this.maxDistance = settings.maxDistance;
+      console.log(this.maxDistance);
       this.bluetoothle.initialize().subscribe(ble => {
         console.log('ble', ble.status) // logs 'enabled'
       }, err => console.log(err));
@@ -37,8 +40,11 @@ export class BluetoothService {
       if(typeof scanStatus.advertisement !== 'string'){ // check that device is iOS
         if(scanStatus.advertisement && scanStatus.advertisement.serviceUuids){ // check that device is broadcasting required information
           if(this.isInTrackerList(scanStatus.advertisement.serviceUuids) && !this.isInWhiteList(scanStatus.address)){
-            let tracker = new Tracker(scanStatus.name, scanStatus.name, this.tileTxPower, scanStatus.address, this.calculateDistance(scanStatus.rssi, this.tileTxPower))
-            this.addToTrackers(tracker);
+            let distance = this.calculateDistance(scanStatus.rssi, this.tileTxPower);
+            if(distance < this.maxDistance){
+              let tracker = new Tracker(scanStatus.name, scanStatus.name, this.tileTxPower, scanStatus.address, distance);
+              this.addToTrackers(tracker);
+            }
           }
         }
       }
