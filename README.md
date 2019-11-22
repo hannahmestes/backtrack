@@ -11,13 +11,11 @@
  Ionic 
  Cordova
  
- 
  ## Setup
- To run this project, install it locally using git
+ To run this project, install it locally using `git clone` or by downloading the zip.
  
- 
- Required tools for this project are:
-  Cordova
- [Ionic] (https://ionicframework.com/getting-started)
- 
+ ### Required tools for this project are:
+ * Cordova
+ * [Ionic](https://ionicframework.com/getting-started)
+ * XCode
  
