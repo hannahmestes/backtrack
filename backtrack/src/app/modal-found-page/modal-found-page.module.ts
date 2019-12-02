@@ -22,6 +22,5 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalPagePage]
 })
 export class ModalPagePageModule {}

@@ -4,6 +4,9 @@ import { BluetoothService } from '../bluetooth-service.service';
 import { Tracker } from '../Tracker';
 import { ActivatedRoute } from '@angular/router';
 import { ModalPagePage } from '../modal-found-page/modal-found-page.page';
+import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-find-page',
@@ -18,7 +21,12 @@ export class FindPagePage implements OnInit {
   colorGreen: boolean;
   address: string;
 
-  constructor(private bluetoothService: BluetoothService, private actRoute: ActivatedRoute, private ngZone: NgZone) {
+  constructor(private bluetoothService: BluetoothService, 
+              private actRoute: ActivatedRoute, 
+              private ngZone: NgZone,
+              private modalController: ModalController,
+              private router: Router,
+) {
     this.distance = 0;
    }
 
@@ -44,8 +52,16 @@ export class FindPagePage implements OnInit {
     this.bluetoothService.addToWhitelist(this.address, this.name);
   }
 
-  foundDeviceModal(){
-    
+    async foundDeviceModal() {
+    const modal = await this.modalController.create({
+      component: ModalPagePage,
+      backdropDismiss: false
+    });
+    return await modal.present();
+  }  
+
+  getHelp(){
+    this.router.navigate(['/tutorial']);
   }
 
   colorCircle(distance) {

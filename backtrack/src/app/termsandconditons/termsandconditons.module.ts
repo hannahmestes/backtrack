@@ -21,6 +21,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
+  declarations: [TermsandconditonsPage],
+  exports: [TermsandconditonsPage]
 })
 
 export class TermsandconditonsPageModule {}

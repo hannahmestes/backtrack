@@ -1,5 +1,6 @@
 import { Component, OnInit,  } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { SettingsService } from '../settings.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class TermsandconditonsPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private settings: SettingsService) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,7 @@ export class TermsandconditonsPage implements OnInit {
   closeModal(){
     this.modalCtrl.dismiss({
       'dismissed': true
-    });
+    }).then(()=> this.settings.acceptTerms());
   }
 
 }

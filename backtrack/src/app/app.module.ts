@@ -10,18 +10,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 import { IonicStorageModule } from '@ionic/storage';
-import { TermsandconditonsPage } from './termsandconditons/termsandconditons.page';
+import { TermsandconditonsPageModule } from './termsandconditons/termsandconditons.module';
 
 
 
 @NgModule({
-  declarations: [AppComponent, TermsandconditonsPage],
-  entryComponents: [TermsandconditonsPage],
+  declarations: [AppComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TermsandconditonsPageModule
   ],
   providers: [
     StatusBar,

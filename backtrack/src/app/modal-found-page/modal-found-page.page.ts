@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'modal-found-page',
@@ -30,6 +31,16 @@ export class ModalPagePage implements OnInit {
       component: ModalPage
     });
     return await modal.present();
+  }
+
+  closeModal(){
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
+  getHelp(){
+    let browser = InAppBrowser.create("https://www.domesticshelters.org/help#?page=1", "_system");
   }
 }
 
