@@ -55,45 +55,44 @@ export class SettingsService {
     this.storage.set("setBackgroundScanning","true");
   }
 
-  retrieveSettings(){
+  retrieveSettings(): Promise<any>{
     // get all of the settings from local storage and set them
-    this.storage.get("blacklistvalue").then(val => {
+    return this.storage.get("blacklistvalue").then(val => {
       if (val==null)
         this.blacklist=[];
       else
         this.blacklist= JSON.parse(val);
-    });
-
-    this.storage.get("acceptTerms").then (val=> {
+      return this.storage.get("acceptTerms")
+    })
+    .then (val=> {
       if (val==null)
       this.hasAcceptedTerms=false;
     else
       this.hasAcceptedTerms= JSON.parse(val);
-    });
-
-    this.storage.get("maxdistancevalue").then (val=> {
+    return this.storage.get("maxdistancevalue");
+    })
+    .then (val=> {
       if (val==null)
       this.maxDistance=15;
     else
       this.maxDistance= JSON.parse(val);
-    });
-
-    this.storage.get("whitelistvalue").then (val=> {
+    return this.storage.get("whitelistvalue");
+    })
+   .then (val=> {
       if (val==null)
       this.whitelist=[];
     else
       this.whitelist= JSON.parse(val);
-    });
-
-    this.storage.get("tutorialViewed").then (val=> {
+    return this.storage.get("tutorialViewed");
+    })
+    .then (val=> {
       if (val==null)
       this.hasViewedTutorial=false;
     else
       this.hasViewedTutorial= JSON.parse(val);
-    });
-
-    this.storage.get("setBackgroundScanning").then (val=> {
-      console.log("VALUE: ", val);
+    return this.storage.get("setBackgroundScanning");
+    })
+    .then (val=> {
       if (val==null)
       this.backgroundScanningEnabled=false;
     else

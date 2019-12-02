@@ -10,7 +10,7 @@ import { SettingsService } from '../settings.service';
 })
 export class TutorialPage implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private settings: SettingsService) {
     SettingsService.hasViewedTutorial = false;
    }
 
@@ -18,7 +18,7 @@ export class TutorialPage implements OnInit {
   }
 
   ReadTutorial() {
-    SettingsService.hasViewedTutorial = true;
+    this.settings.tutorialViewed();
     this.router.navigate(['/tabs/tab1']);
   }
 
