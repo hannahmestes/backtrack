@@ -22,7 +22,9 @@ export class Tab1Page {
   constructor(private btService: BluetoothService, private zone:NgZone, public router: Router) {
     this.trackers$ = btService.getTrackers();
     this.trackers$.subscribe(res => {
-      this.zone.run(() => this.trackers = res);
+      this.zone.run(() => {
+        this.trackers = res.sort((a: Tracker, b:Tracker) => a.distance-b.distance);
+      });
       console.log(res);
     });
     this.buttonColor = 'primary';
