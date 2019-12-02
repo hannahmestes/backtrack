@@ -3,6 +3,7 @@ import { ɵTestingCompiler } from '@angular/core/testing';
 import { BluetoothService } from '../bluetooth-service.service';
 import { Tracker } from '../Tracker';
 import { ActivatedRoute } from '@angular/router';
+import { ModalPagePage } from '../modal-found-page/modal-found-page.page';
 
 @Component({
   selector: 'app-find-page',
@@ -45,6 +46,10 @@ export class FindPagePage implements OnInit {
     this.bluetoothService.addToWhitelist(this.address);
   }
 
+  foundDeviceModal(){
+    
+  }
+
   colorCircle(distance) {
     if (distance >= 10) {
       this.colorRed = true;
@@ -59,6 +64,10 @@ export class FindPagePage implements OnInit {
       this.colorYellow = false;
       this.colorGreen = true;
     }
+
+
+
+    
     // else{
       // return console.error();
     // }

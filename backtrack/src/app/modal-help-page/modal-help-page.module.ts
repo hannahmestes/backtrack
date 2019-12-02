@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FindPagePage } from './find-page.page';
-
+import { ModalHelpPagePage } from './modal-help-page.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FindPagePage
+    component: ModalHelpPagePage
   }
 ];
 
@@ -22,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FindPagePage]
+  declarations: [ModalHelpPagePage]
 })
-export class FindPagePageModule {}
+export class ModalHelpPagePageModule {}
