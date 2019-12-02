@@ -1,14 +1,12 @@
 .btn{
-  border: none;
-  background-color: dodgerblue;
-  padding: 60px 20px;
-  text-align: middle;
-  font-size: 16px;
+  margin-top: 10px;
   cursor: pointer;
   display: flex;
-  border-radius: 50%;
+  --border-radius: 50% !important;
   position: relative;
-  left: calc(50% - 63px);
+  left: calc(50% - 75px);
+  height: 150px;
+  width: 150px;
 }
 
 .head{
@@ -20,11 +18,17 @@
   font-size:16px
 }
 
-.btn:hover{
-  background-color: red;
-}
 .text{
-  visibility: visible;
-  content: "";
   color: grey;
+}
+
+.address{
+  text-overflow: ellipsis;
+  color: grey;
+  font-size: 11px;
+  width: 200px;
+}
+
+.distance{
+  text-align: center;
 }

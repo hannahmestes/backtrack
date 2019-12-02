@@ -16,20 +16,28 @@
           <ion-col size-md="6" offset-md="3">
             <h1>{{ name }}</h1>
             <script>colorCircle()</script>
-            <ion-item>
               <p *ngIf="colorGreen"><img src="https://i.imgur.com/1Gjbpgd.png"/></p>
               <p *ngIf="colorYellow"><img src="https://i.imgur.com/qPvFj73.png"/></p>
               <p *ngIf="colorRed"><img src="https://i.imgur.com/Z2TVn8J.png"/></p>
-            </ion-item>
-            <ion-item>
-            <div text-center>
-              <ion-text> {{ distance | number:'1.1-5' }} m away </ion-text>
+            <div *ngIf="distance && distance>0">
+              <div class="center">
+                <ion-text> {{ distance | number:'1.0-2' }} m away </ion-text>
+              </div>
             </div>
-            </ion-item>
+            <div *ngIf="!distance || distance==0">
+              <div class="center">
+                <ion-text> Connecting ... </ion-text>
+              </div>
+            </div>
+            <div *ngIf="distance && distance<0">
+              <div class="center">
+                <ion-button (click)="getDistance()"> Reconnect </ion-button>
+              </div>
+            </div>
             <div class="ion-margin-vertical ion-text-center">
-              <div><ion-button color="primary" (click)="foundDeviceModal()">Found Device</ion-button></div>
-              <div><ion-button color="primary" (click)="addToWhitelist()">Whitelist this device</ion-button></div>
-              <ion-button shape="round" color="medium">Need Help?</ion-button>  
+              <div><ion-button class="option-button" color="primary" (click)="foundDeviceModal()">Found Device</ion-button></div>
+              <div><ion-button class="option-button" color="primary" (click)="addToWhitelist()">Whitelist this device</ion-button></div>
+              <ion-button class="option-button" color="medium">Need Help?</ion-button>  
             </div>
           </ion-col>
         </ion-row>

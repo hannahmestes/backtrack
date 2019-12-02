@@ -8,14 +8,29 @@
 </ion-header>
 
 <ion-content>
-    <button color="primary" class="btn toScan" (click)="presentModal()">Tap to Scan</button>
+    <ion-button [color]="buttonColor" class="btn" (click)="scan()">Tap to Scan</ion-button>
     <ion-card class="tracker-list">
       <ion-card-content>
         <ng-container *ngIf="trackers$ | async as trackers">
           <a class="text">Detected trackers will appear here. Tap the button above to begin scanning.</a>
           <div *ngFor="let tracker of trackers">
           <ion-item (click)="trackerSelect(tracker.address)" detail>
-            {{tracker.name? tracker.name : null}}
+            <ion-label>
+              <p>
+              {{tracker.name? tracker.name : "No Name"}}
+              </p>
+            
+              <p class="address">{{tracker.address}}</p>
+            </ion-label>
+            <div *ngIf="this.tracker.distance<3">
+              <ion-chip color ="success" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
+            </div>
+            <div *ngIf="this.tracker.distance>3 && this.tracker.distance<7">
+              <ion-chip color ="warning" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
+            </div>
+            <div *ngIf="this.tracker.distance>7">
+              <ion-chip color ="danger" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
+            </div>
           </ion-item>
           </div>
         </ng-container>
