@@ -13,7 +13,7 @@ import { TermsandconditonsPage } from '../termsandconditons/termsandconditons.pa
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
-  declarations: [Tab3Page, TermsandconditonsPage],
+  declarations: [Tab3Page],
   exports: [TermsandconditonsPage],
   entryComponents: [TermsandconditonsPage]
     
