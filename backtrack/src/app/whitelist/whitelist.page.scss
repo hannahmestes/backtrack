@@ -1,0 +1,27 @@
+
+  .head{
+    font-size: 30px;
+    position: relative;
+  } 
+  
+  .listin{
+    font-size:16px
+  }
+  
+  .text{
+    visibility: visible;
+    content: "";
+    color: rgb(105, 55, 55);
+  }
+  
+  .dlt{
+    display: flex;
+    border-radius: 50%;
+  }
+
+  .track{
+    
+    align-content: left;
+    display: flex;
+    position: relative;
+  }

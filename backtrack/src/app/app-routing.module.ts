@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'termsandconditons', loadChildren: './termsandconditons/termsandconditons.module#TermsandconditonsPageModule' },
   { path: 'find-page/:address', loadChildren: './find-page/find-page.module#FindPagePageModule' },
   { path: 'blacklist', loadChildren: './blacklist/blacklist.module#blacklistPageModule'},
+  { path: 'whitelist', loadChildren: './whitelist/whitelist.module#whitelistPageModule'},
   { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule'}
 
 ];

@@ -13,25 +13,14 @@ export class Tab2Page {
 
   public notifications: boolean;
   public distance: number;
+  public bkgsc: boolean;
 
-  constructor(private settings: SettingsService, public router: Router) {}
-
-  setBackgroundTracking(){
-    if (this.settings.backgroundScanningEnabled == false){
-      this.settings.setBackgroundScanning(true);
-    }
-    else if (this.settings.backgroundScanningEnabled == true){
-      this.settings.setBackgroundScanning(false);
-    }
+  constructor(private settings: SettingsService, public router: Router) {
+    this.bkgsc = true;
   }
 
-  setNotifications(){
-    if (this.notifications == false){
-      this.notifications = true;
-    }
-    else if (this.notifications == true){
-      this.notifications = false;
-    }
+  saveSettings(){
+    this.settings.setBackgroundScanning(this.bkgsc);
   }
 
   changeDistance(x: number){
@@ -40,5 +29,9 @@ export class Tab2Page {
 
   blacklist(){
     this.router.navigate(['/blacklist']);
+  }
+
+  whitelist(){
+    this.router.navigate(['/whitelist'])
   }
 }
