@@ -13,7 +13,9 @@ import { NavController } from '@ionic/angular';
 })
 export class Tab3Page {
 
-  constructor(public modalController: ModalController, private router: Router) {}
+  constructor(public modalController: ModalController, private router: Router) {
+
+  }
 
   async Terms() {
     const modal = await this.modalController.create({
@@ -22,7 +24,6 @@ export class Tab3Page {
     });
     return await modal.present();
   }  
-
 
   toTutorial() {
     this.router.navigate(['/tutorial']);

@@ -4,15 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { FindPagePage } from './find-page.page';
-import { ModalPagePage } from '../modal-found-page/modal-found-page.page';
 
+import { ModalPagePage } from './modal-found-page.page';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: FindPagePage
+    component: ModalPagePage
   }
 ];
 
@@ -23,7 +22,5 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-entryComponents: [ModalPagePage],
-  declarations: [FindPagePage, ModalPagePage]
 })
-export class FindPagePageModule {}
+export class ModalPagePageModule {}

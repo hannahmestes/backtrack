@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',

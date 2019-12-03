@@ -7,10 +7,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  { path: 'termsandconditons', loadChildren: './termsandconditons/termsandconditons.module#TermsandconditonsPageModule' },
   { path: 'find-page/:address', loadChildren: './find-page/find-page.module#FindPagePageModule' },
-  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule'}
-
+  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule'},
 ];
 
 
