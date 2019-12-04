@@ -25,10 +25,10 @@
             <div *ngIf="this.tracker.distance<3">
               <ion-chip color ="success" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
             </div>
-            <div *ngIf="this.tracker.distance>3 && this.tracker.distance<7">
+            <div *ngIf="this.tracker.distance>3 && this.tracker.distance<10">
               <ion-chip color ="warning" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
             </div>
-            <div *ngIf="this.tracker.distance>7">
+            <div *ngIf="this.tracker.distance>10">
               <ion-chip color ="danger" slot="end" class="distance">{{tracker.distance | number:'1.0-0'}}m</ion-chip>
             </div>
           </ion-item>

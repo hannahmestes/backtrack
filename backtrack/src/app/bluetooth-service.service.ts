@@ -18,7 +18,7 @@ export class BluetoothService {
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
   distance: BehaviorSubject<number> = new BehaviorSubject(-1);
   isFinding= false;
-  tileTxPower = -50;
+  tileTxPower = -55;
   maxDistance: number;
 
   // initializes bluetooth function

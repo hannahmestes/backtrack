@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular'
+import { SettingsService } from '../settings.service';
 
 @Component({
   selector: 'app-whitelist',
@@ -15,13 +16,18 @@ export class whitelistPage {
 
   trackers: any;
 
-  constructor(public alertCont: AlertController) {
-    
+  constructor(public alertCont: AlertController, private settings: SettingsService) {
+
+  }
+
+  ngOnInit(){
+    this.trackers = this.settings.whitelist;
   }
 
   removeTracker(tracker: Tracker) {
     for (let x = 0; x < this.trackers.length; x++){
-      if (this.trackers[x] == tracker) {
+      if (this.trackers[x].address == tracker.address) {
+        this.settings.removeFromWhitelist(tracker.address);
         this.trackers.splice(x,1);
       }
     }
@@ -30,7 +36,6 @@ export class whitelistPage {
   async confirmation(tracker: Tracker){
     const alert = await this.alertCont.create({
       header: 'Are you sure?',
-      message: 'Would you like to do ...',
       buttons: [
         {
           text: 'Cancel',

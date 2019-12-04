@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class Tab2Page {
 
   public notifications: boolean;
-  public distance: number;
+  public range: number;
   public bkgsc: boolean;
 
   constructor(private settings: SettingsService, public router: Router) {
@@ -21,10 +21,11 @@ export class Tab2Page {
 
   saveSettings(){
     this.settings.setBackgroundScanning(this.bkgsc);
+    this.settings.setMaxDistance(this.range);
   }
 
   changeDistance(x: number){
-    this.distance = x;
+    this.range = x;
   }
 
   blacklist(){

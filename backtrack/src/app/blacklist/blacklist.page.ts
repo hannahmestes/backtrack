@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular'
+import { SettingsService } from '../settings.service';
+
 
 @Component({
   selector: 'app-blacklist',
@@ -18,10 +20,10 @@ export class blacklistPage {
   may: Tracker;
   trackers: any;
 
-  constructor(public alertCont: AlertController) {
-    this.brock = new Tracker('brock', 'address', 69, 'fourtwenty');
-    this.jerry = new Tracker('jerry', 'address', 69, 'fourtwenty');
-    this.may = new Tracker('may', 'address', 69, 'fourtwenty');
+  constructor(public alertCont: AlertController, private settings: SettingsService) {
+    this.brock = new Tracker('brock', 'address', 50, 'ABCD', 0);
+    this.jerry = new Tracker('jerry', 'address', 40, 'EFGH', 0);
+    this.may = new Tracker('may', 'address', 30, 'IJKL', 0);
     this.trackers = [this.brock,this.jerry,this.may];
   }
 
@@ -46,7 +48,11 @@ export class blacklistPage {
         {
           text: 'Whitelist',
           role: 'whitelist',
-          cssClass: 'whtlst'
+          cssClass: 'whtlst',
+          handler: () => {
+            this.removeTracker(tracker);
+            this.settings.addToWhitelist(tracker.name, tracker.address);
+          }
         },
         {
           text: 'Remove',

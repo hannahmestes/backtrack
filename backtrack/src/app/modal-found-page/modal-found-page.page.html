@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Found Device</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="padding">
+    Does the device that you just found belong to you?
+		<br>
+	If not, the device may have been planted on your person for nefarious purposes.
+	If you don't know how to proceed, calling law enforcement agencies might be a good start.
+	They can help you get the resources you need and help dispose of the device you just found.
+	<br>
+	If you need any further assistance, you can click the button below to find any domestic abuse 
+	shelthers near you.
+	</div>
+	<ion-button (click)="getHelp()" expand="block">Get Help</ion-button>
+	<ion-button expand="full" (click)="closeModal()">OK</ion-button>
+</ion-content>

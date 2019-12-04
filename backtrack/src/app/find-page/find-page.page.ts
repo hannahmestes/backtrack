@@ -3,6 +3,11 @@ import { ɵTestingCompiler } from '@angular/core/testing';
 import { BluetoothService } from '../bluetooth-service.service';
 import { Tracker } from '../Tracker';
 import { ActivatedRoute } from '@angular/router';
+import { ModalPagePage } from '../modal-found-page/modal-found-page.page';
+import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular'
+
 
 @Component({
   selector: 'app-find-page',
@@ -17,7 +22,13 @@ export class FindPagePage implements OnInit {
   colorGreen: boolean;
   address: string;
 
-  constructor(private bluetoothService: BluetoothService, private actRoute: ActivatedRoute, private ngZone: NgZone) {
+  constructor(private bluetoothService: BluetoothService, 
+              private actRoute: ActivatedRoute, 
+              private ngZone: NgZone,
+              private modalController: ModalController,
+              private router: Router,
+              public alertCont: AlertController
+) {
     this.distance = 0;
    }
 
@@ -41,6 +52,43 @@ export class FindPagePage implements OnInit {
 
   addToWhitelist(){
     this.bluetoothService.addToWhitelist(this.address, this.name);
+    
+  }
+
+  async confirmation(){
+    const alert = await this.alertCont.create({
+      header: 'Are you sure?',
+      message: 'Would you like to add this device to the Whitelist?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'can'
+        },
+        {
+          text: 'Trust',
+          role: 'remove',
+          cssClass: 'rmv',
+          handler: () =>{
+            this.addToWhitelist();
+            this.router.navigate(['/']);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+    async foundDeviceModal() {
+    const modal = await this.modalController.create({
+      component: ModalPagePage,
+      backdropDismiss: false
+    });
+    return await modal.present();
+  }  
+
+  getHelp(){
+    this.router.navigate(['/tutorial']);
   }
 
   colorCircle(distance) {
@@ -57,6 +105,7 @@ export class FindPagePage implements OnInit {
       this.colorYellow = false;
       this.colorGreen = true;
     }
+
   }
 
 }
