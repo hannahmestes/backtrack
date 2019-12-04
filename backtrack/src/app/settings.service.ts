@@ -34,6 +34,24 @@ export class SettingsService {
     this.storage.set("blacklistvalue",JSON.stringify(this.blacklist));
   }
 
+  removeFromWhitelist(trackerAddress: string){
+      for (let x = 0; x < this.whitelist.length; x++){
+      if (this.whitelist[x].address == trackerAddress) {
+        this.whitelist.splice(x,1);
+        this.storage.set("whitelistvalue",JSON.stringify(this.whitelist));
+      }
+    }
+  }
+
+  removeFromBlacklist(trackerAddress: string){
+      for (let x = 0; x < this.blacklist.length; x++){
+      if (this.blacklist[x].address == trackerAddress) {
+        this.blacklist.splice(x,1);
+        this.storage.set("blacklistvalue",JSON.stringify(this.blacklist));
+      }
+    }
+  }
+
   setMaxDistance(maxDistance: number){
     this.maxDistance = maxDistance;
     this.storage.set("maxdistancevalue", maxDistance);

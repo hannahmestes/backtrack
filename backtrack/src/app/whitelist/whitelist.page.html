@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+              Whitelist
+      </ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+ 
+  <ion-content>
+    <ion-card class="tracker-list">
+      <ion-card-content>
+        <ng-container *ngIf="trackers">
+          <div *ngFor="let tracker of trackers">
+            <ion-item>
+              <ion-label>
+                <p>{{tracker.name? tracker.name : null}}</p>
+                <p class="address">{{tracker.address}}</p>
+              </ion-label>
+              <ion-button fill="clear" size="large" class="dlt" (click) = "confirmation(tracker)">
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </div>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

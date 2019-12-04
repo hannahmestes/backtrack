@@ -18,7 +18,7 @@ export class BluetoothService {
   trackers: BehaviorSubject<Tracker[]> = new BehaviorSubject([]);
   distance: BehaviorSubject<number> = new BehaviorSubject(-1);
   isFinding= false;
-  tileTxPower = -50;
+  tileTxPower = -55;
   maxDistance: number;
 
   // initializes bluetooth function
@@ -31,10 +31,10 @@ export class BluetoothService {
     });
   }
 
-  // ngOnInit(){
-  //   this.maxDistance = this.settings.maxDistance;
-  //   console.log("MAX DISTANCE", this.maxDistance)
-  // }
+  ngOnInit(){
+    this.maxDistance = this.settings.maxDistance;
+    console.log("MAX DISTANCE", this.maxDistance)
+  }
 
   // starts scan, adds non-whitelisted devices to trackers
   public startScanning(): void{

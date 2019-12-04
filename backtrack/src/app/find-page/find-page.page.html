@@ -21,22 +21,25 @@
               <p *ngIf="colorRed"><img src="https://i.imgur.com/Z2TVn8J.png"/></p>
             <div *ngIf="distance && distance>0">
               <div class="center">
+                <p class="address">{{address}}</p>
                 <ion-text> {{ distance | number:'1.0-2' }} m away </ion-text>
               </div>
             </div>
             <div *ngIf="!distance || distance==0">
               <div class="center">
+                <p class="address">{{address}}</p>
                 <ion-text> Connecting ... </ion-text>
               </div>
             </div>
             <div *ngIf="distance && distance<0">
               <div class="center">
+                <p class="address">{{address}}</p>
                 <ion-button (click)="getDistance()"> Reconnect </ion-button>
               </div>
             </div>
             <div class="ion-margin-vertical ion-text-center">
               <div><ion-button class="option-button" color="primary" (click)="foundDeviceModal()">Found Device</ion-button></div>
-              <div><ion-button class="option-button" color="primary" (click)="addToWhitelist()">Whitelist this device</ion-button></div>
+              <div><ion-button class="option-button" color="primary" (click)="confirmation()">Whitelist this device</ion-button></div>
               <ion-button class="option-button" color="medium" (click)="getHelp()">Need Help?</ion-button>  
             </div>
           </ion-col>
